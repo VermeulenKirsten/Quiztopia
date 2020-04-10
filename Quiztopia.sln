@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29806.167
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quiztopia.Web", "Quiztopia.Web\Quiztopia.Web.csproj", "{42D2CDB2-D9D0-4FD9-A7E0-EB0A35DC33DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quiztopia.Models", "Quiztopia.Models\Quiztopia.Models.csproj", "{23213E62-E67B-406B-9DA4-5AE5B044AD9B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{42D2CDB2-D9D0-4FD9-A7E0-EB0A35DC33DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42D2CDB2-D9D0-4FD9-A7E0-EB0A35DC33DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42D2CDB2-D9D0-4FD9-A7E0-EB0A35DC33DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42D2CDB2-D9D0-4FD9-A7E0-EB0A35DC33DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23213E62-E67B-406B-9DA4-5AE5B044AD9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23213E62-E67B-406B-9DA4-5AE5B044AD9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23213E62-E67B-406B-9DA4-5AE5B044AD9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23213E62-E67B-406B-9DA4-5AE5B044AD9B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {14CA5338-52DA-468D-9CFA-BB0FFB7390D4}
+	EndGlobalSection
+EndGlobal
