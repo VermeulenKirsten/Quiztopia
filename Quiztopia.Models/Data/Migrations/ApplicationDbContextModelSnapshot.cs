@@ -291,16 +291,26 @@ namespace Quiztopia.Models.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(500)")
+                        .HasMaxLength(500);
+
                     b.Property<int>("DifficultyId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.Property<int>("TopicId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DifficultyId");
+
+                    b.HasIndex("TopicId");
 
                     b.ToTable("Quizzes");
                 });
@@ -328,7 +338,9 @@ namespace Quiztopia.Models.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(25)")
+                        .HasMaxLength(25);
 
                     b.HasKey("Id");
 
@@ -397,6 +409,21 @@ namespace Quiztopia.Models.Data.Migrations
                     b.HasOne("Quiztopia.Models.Question", "Question")
                         .WithMany("QuestionsAnswers")
                         .HasForeignKey("QuestionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Quiztopia.Models.Quiz", b =>
+                {
+                    b.HasOne("Quiztopia.Models.Difficulty", "Difficulty")
+                        .WithMany("Quiz")
+                        .HasForeignKey("DifficultyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Quiztopia.Models.Topic", "Topic")
+                        .WithMany("Quiz")
+                        .HasForeignKey("TopicId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

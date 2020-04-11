@@ -21,6 +21,11 @@ namespace Quiztopia.Models
         [Required(ErrorMessage = "The field 'Name' is required")]
         public string Name { get; set; }
 
+        [Display(Name = "Description")]
+        [MaxLength(500)]
+        [StringLength(500, ErrorMessage = "Your description can only be 500 characters long.")]
+        public string Description { get; set; } = "No description available";
+
         [Display(Name = "Topic")]
         public int TopicId { get; set; }
 
@@ -31,5 +36,7 @@ namespace Quiztopia.Models
         // Navigation properties
 
         public ICollection<QuizzesQuestions> QuizzesQuestions { get; set; }
+        public Topic Topic { get; set; }
+        public Difficulty Difficulty { get; set; }
     }
 }

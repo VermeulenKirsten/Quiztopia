@@ -67,7 +67,6 @@ D:\MCT\2nd year\4th semester\Backend Development\Labs\Quiztopia\Quiztopia\Quizto
 D:\MCT\2nd year\4th semester\Backend Development\Labs\Quiztopia\Quiztopia\Quiztopia.Web\obj\Debug\netcoreapp3.1\Quiztopia.Web.RazorCoreGenerate.cache
 D:\MCT\2nd year\4th semester\Backend Development\Labs\Quiztopia\Quiztopia\Quiztopia.Web\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\_ViewStart.cshtml.g.cs
 D:\MCT\2nd year\4th semester\Backend Development\Labs\Quiztopia\Quiztopia\Quiztopia.Web\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
-D:\MCT\2nd year\4th semester\Backend Development\Labs\Quiztopia\Quiztopia\Quiztopia.Web\obj\Debug\netcoreapp3.1\Razor\Views\Home\Privacy.cshtml.g.cs
 D:\MCT\2nd year\4th semester\Backend Development\Labs\Quiztopia\Quiztopia\Quiztopia.Web\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Error.cshtml.g.cs
 D:\MCT\2nd year\4th semester\Backend Development\Labs\Quiztopia\Quiztopia\Quiztopia.Web\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layout.cshtml.g.cs
 D:\MCT\2nd year\4th semester\Backend Development\Labs\Quiztopia\Quiztopia\Quiztopia.Web\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_LoginPartial.cshtml.g.cs
@@ -179,3 +178,10 @@ D:\MCT\2nd year\4th semester\Backend Development\Labs\Quiztopia\Quiztopia\Quizto
 D:\MCT\2nd year\4th semester\Backend Development\Labs\Quiztopia\Quiztopia\Quiztopia.Web\obj\Debug\netcoreapp3.1\Razor\Views\Question\Create.cshtml.g.cs
 D:\MCT\2nd year\4th semester\Backend Development\Labs\Quiztopia\Quiztopia\Quiztopia.Web\obj\Debug\netcoreapp3.1\Razor\Views\Question\Edit.cshtml.g.cs
 D:\MCT\2nd year\4th semester\Backend Development\Labs\Quiztopia\Quiztopia\Quiztopia.Web\obj\Debug\netcoreapp3.1\Razor\Views\Question\Delete.cshtml.g.cs
+D:\MCT\2nd year\4th semester\Backend Development\Labs\Quiztopia\Quiztopia\Quiztopia.Web\bin\Debug\netcoreapp3.1\libman.json
+D:\MCT\2nd year\4th semester\Backend Development\Labs\Quiztopia\Quiztopia\Quiztopia.Web\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\Login.cshtml.g.cs
+D:\MCT\2nd year\4th semester\Backend Development\Labs\Quiztopia\Quiztopia\Quiztopia.Web\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\Logout.cshtml.g.cs
+D:\MCT\2nd year\4th semester\Backend Development\Labs\Quiztopia\Quiztopia\Quiztopia.Web\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\Register.cshtml.g.cs
+D:\MCT\2nd year\4th semester\Backend Development\Labs\Quiztopia\Quiztopia\Quiztopia.Web\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\_ViewImports.cshtml.g.cs
+D:\MCT\2nd year\4th semester\Backend Development\Labs\Quiztopia\Quiztopia\Quiztopia.Web\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\_ValidationScriptsPartial.cshtml.g.cs
+D:\MCT\2nd year\4th semester\Backend Development\Labs\Quiztopia\Quiztopia\Quiztopia.Web\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\_ViewImports.cshtml.g.cs
