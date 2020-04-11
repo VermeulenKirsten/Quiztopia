@@ -20,5 +20,9 @@ namespace Quiztopia.Models
         [StringLength(25, ErrorMessage = "Your answer can only be 25 characters long.")]
         [Required(ErrorMessage = "The field 'Name' is required")]
         public string Name { get; set; }
+
+        // Navigation properties
+
+        public ICollection<Quiz> Quiz { get; set; }
     }
 }

@@ -40,9 +40,6 @@ namespace Quiztopia.Web
             services.AddDbContext<QuiztopiaDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
-                .AddRoles<IdentityRole>()
-                .AddEntityFrameworkStores<QuiztopiaDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
         }

@@ -21,9 +21,9 @@ namespace Quiztopia.Web.Controllers
         }
 
         // GET: Question
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(int quizId)
         {
-            var result = await questionRepo.GetAllQuestionsAsync();
+            var result = await questionRepo.GetAllQuestionsByQuizAsync(quizId);
             return View(result);
         }
 

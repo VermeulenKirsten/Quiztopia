@@ -10,5 +10,9 @@ namespace Quiztopia.Models
 
         public int Id { get; set; }
         public string Name { get; set; }
+
+        // Navigation properties
+
+        public ICollection<Quiz> Quiz { get; set; }
     }
 }
