@@ -12,6 +12,7 @@ using Quiztopia.Models.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Quiztopia.Models.Repositories;
 
 namespace Quiztopia.Web
 {
@@ -27,6 +28,15 @@ namespace Quiztopia.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Model services
+
+            services.AddScoped<IAnswerRepo, AnswerRepo>();
+            services.AddScoped<IQuestionRepo, QuestionRepo>();
+            services.AddScoped<IQuizRepo, QuizRepo>();
+            services.AddScoped<ITopicRepo, TopicRepo>();
+            services.AddScoped<IDifficultyRepo, DifficultyRepo>();
+
+
             services.AddDbContext<QuiztopiaDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
