@@ -1,0 +1,43 @@
+﻿@model Quiztopia.Web.ViewModels.CreateUpdateQuizVM
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Quiz</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Quiz.Name" class="control-label"></label>
+                <input asp-for="Quiz.Name" class="form-control" />
+                <span asp-validation-for="Quiz.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Quiz.TopicId" class="control-label"></label>
+                <select asp-for="Quiz.TopicId" asp-items="@Model.TopicList" class="form-control"></select>
+                <span asp-validation-for="Quiz.TopicId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Quiz.DifficultyId" class="control-label"></label>
+                <select asp-for="Quiz.DifficultyId" asp-items="@Model.DifficultyList" class="form-control"></select>
+                <span asp-validation-for="Quiz.DifficultyId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
