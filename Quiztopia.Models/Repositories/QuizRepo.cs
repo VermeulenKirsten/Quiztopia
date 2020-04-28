@@ -67,6 +67,11 @@ namespace Quiztopia.Models.Repositories
             return await context.Quizzes.Include(t => t.Topic).Include(d => d.Difficulty).OrderBy(q => q.Name).ToListAsync();
         }
 
+        public async Task<IEnumerable<Quiz>> GetQuizzesByNameAsync(string name)
+        {
+            return await context.Quizzes.Include(t => t.Topic).Include(d => d.Difficulty).Where(n => n.Name.Contains(name)).OrderBy(q => q.Name).ToListAsync();
+        }
+
         public async Task<Quiz> GetQuizByIdAsync(int quizId)
         {
             return await context.Quizzes.SingleOrDefaultAsync<Quiz>(e => e.Id == quizId);
