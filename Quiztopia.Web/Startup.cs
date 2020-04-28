@@ -45,7 +45,7 @@ namespace Quiztopia.Web
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, RoleManager<IdentityRole> roleMgr, UserManager<IdentityUser> userMgr, QuiztopiaDbContext context)
         {
             if (env.IsDevelopment())
             {
@@ -73,6 +73,9 @@ namespace Quiztopia.Web
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
+
+            QuiztopiaDbContextExtensions.SeedRoles(roleMgr).Wait();
+            QuiztopiaDbContextExtensions.SeedUsers(userMgr).Wait();
         }
     }
 }
