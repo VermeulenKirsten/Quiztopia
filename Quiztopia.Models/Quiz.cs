@@ -13,7 +13,7 @@ namespace Quiztopia.Models
         [Key]
         [Display(Name = "Id")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [Display(Name = "Name")]
         [MaxLength(50)]

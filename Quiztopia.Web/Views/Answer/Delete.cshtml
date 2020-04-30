@@ -1,4 +1,4 @@
-﻿@model Quiztopia.Models.Answer
+﻿@model Quiztopia.Web.ViewModels.QuestionAnswerVM
 
 @{
     ViewData["Title"] = "Delete";
@@ -12,26 +12,26 @@
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Id)
+            @Html.DisplayNameFor(model => model.Answer.PossibleAnswer)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Id)
+            @Html.DisplayFor(model => model.Answer.PossibleAnswer)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AnswerString)
+            @Html.DisplayNameFor(model => model.Answer.IsCorrect)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AnswerString)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IsCorrect)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IsCorrect)
+            @Html.DisplayFor(model => model.Answer.IsCorrect)
         </dd>
     </dl>
     
     <form asp-action="Delete">
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(vm => vm.Answer.Id)
+        @Html.HiddenFor(vm => vm.Answer.PossibleAnswer)
+        @Html.HiddenFor(vm => vm.Answer.IsCorrect)
+        @Html.HiddenFor(vm => vm.Answer.QuestionsAnswers)
+        @Html.HiddenFor(vm => vm.QuestionId)
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-action="Index">Back to List</a>
     </form>

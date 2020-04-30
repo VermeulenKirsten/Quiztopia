@@ -4,24 +4,51 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+    <div class="jumbotron">
+        <h1 class="display-3 pb-4">Quizzes</h1>
+        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+        {
+            <p class="lead pb-4">
+                <a class="btn btn-dark btn-lg" asp-action="Create" role="button">Create New</a>
+            </p>
+        }
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-4">
+                    <div class="card text-white bg-secondary mb-3" style="max-width: 25rem;">
+                        <div class="card-header">@Html.DisplayFor(modelItem => item.Topic.Name)</div>
+                        <div class="card-body">
+                            <h4 class="card-title">@Html.DisplayFor(modelItem => item.Name)</h4>
+                            <p class="card-text">@Html.DisplayFor(modelItem => item.Description)</p>
+                            <p class="card-text">@Html.DisplayFor(modelItem => item.Difficulty.Name)</p>
+                            <hr class="border-light my-4">
 
+                            <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                                <a href="@Url.Action("Details", "Quiz", new { id = item.Id })" class="card-link">
+                                    <button type="button" class="btn btn-success btn-block">Play</button>
+                                </a>
 
-@foreach (var item in Model)
-{
-    <a href="@Url.Action("IndexByQuiz", "Question", new { id = item.Id })">
-        <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
-            <div class="card-header">@Html.DisplayFor(modelItem => item.Topic.Name)</div>
-            <div class="card-body">
-                <h4 class="card-title">@Html.DisplayFor(modelItem => item.Name)</h4>
-                <p class="card-text">@Html.DisplayFor(modelItem => item.Description)</p>
-                <hr class="border-secondary my-4">
-                <p class="card-text">@Html.DisplayFor(modelItem => item.Difficulty.Name)</p>
-            </div>
+                                @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                                {
+                                    <a href="@Url.Action("Index", "Question", new { quizId = item.Id })" class="card-link">
+                                        <button type="button" class="btn btn-info btn-block">Edit</button>
+                                    </a>
+                                    <a href="@Url.Action("Delete", "Quiz", new { quizId = item.Id })" class="card-link">
+                                        <button type="button" class="btn btn-danger btn-block">Delete</button>
+                                    </a>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
         </div>
-    </a>
-}
+    </div>
+
+
+
+
+
+

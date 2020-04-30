@@ -1,0 +1,51 @@
+﻿@model IEnumerable<IdentityRole>
+
+@{
+    ViewData["Title"] = "IndexRoles";
+}
+
+<h1>IndexRoles</h1>
+
+@if (!Model.Any())
+{
+    // No roles
+
+    <p>Er zijn nog geen rollen aangemaakt.</p>
+    <br />
+    <p>De eerste rol kan @Html.ActionLink("hier", "CreateRole") worden aangemaakt</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "EditRole", new { roleName = item.Name }) |
+                        @Html.ActionLink("Details", "DetailsRole", new { roleName = item.Name }) |
+                        @Html.ActionLink("Delete", "DeleteRole", new { roleName = item.Name })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    @Html.ActionLink("Add role", "CreateRole")
+}
