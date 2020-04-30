@@ -62,40 +62,19 @@ namespace Quiztopia.Models.Repositories
             }
         }
 
-        public async Task<QuestionsAnswers> DeleteAnswerFromQuestion(QuestionsAnswers questionsAnswers)
-        {
-            try
-            {
-                context.QuestionsAnswers.Remove(questionsAnswers);
-                await context.SaveChangesAsync();
-                return questionsAnswers;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                return null;
-            }
-        
-        }
-
         public async Task<IEnumerable<Answer>> GetAllAnswersAsync()
         {
-            return await context.Answers.OrderBy(e => e.PossibleAnswer).ToListAsync();
+            return await context.Answers.OrderBy(e => e.AnswerString).ToListAsync();
         }
 
-        public async Task<Answer> GetAnswerByIdAsync(Guid answerId)
+        public async Task<Answer> GetAnswerByIdAsync(int answerId)
         {
             return await context.Answers.SingleOrDefaultAsync<Answer>(e => e.Id == answerId);
         }
 
-        public async Task<IEnumerable<Answer>> GetAnswerByAnswerAsync(string answer, bool isCorrect)
+        public async Task<IEnumerable<Answer>> GetAllAnswersByQuestionAsync(int questionId)
         {
-            return await context.Answers.Where(e => e.PossibleAnswer == answer).Where(e => e.IsCorrect == isCorrect).ToListAsync();
-        }
-
-        public async Task<IEnumerable<Answer>> GetAllAnswersByQuestionAsync(Guid questionId)
-        {
-            return await context.Answers.Include(q => q.QuestionsAnswers).ThenInclude(q => q.Question).Where(q => q.QuestionsAnswers.Any(i => i.Question.Id == questionId)).OrderBy(e => e.PossibleAnswer).ToListAsync();
+            throw new NotImplementedException();
         }
 
     }

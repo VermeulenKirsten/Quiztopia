@@ -1,4 +1,4 @@
-﻿@model Quiztopia.Web.ViewModels.QuizQuestionVM
+﻿@model Quiztopia.Models.Question
 
 @{
     ViewData["Title"] = "Create";
@@ -6,20 +6,16 @@
 
 <h1>Create</h1>
 
-<h4>QuizQuestionVM</h4>
+<h4>Question</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-            @Html.AntiForgeryToken()
-            @Html.HiddenFor(vm => vm.QuizId)
-
             <div class="form-group">
-                <label asp-for="Question.QuestionString" class="control-label"></label>
-                <input asp-for="Question.QuestionString" class="form-control" />
-                <span asp-validation-for="Question.QuestionString" class="text-danger"></span>
+                <label asp-for="QuestionString" class="control-label"></label>
+                <input asp-for="QuestionString" class="form-control" />
+                <span asp-validation-for="QuestionString" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
@@ -32,3 +28,6 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

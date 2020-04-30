@@ -30,15 +30,16 @@ namespace Quiztopia.Web
         {
             // Model services
 
-            services.AddTransient<IAnswerRepo, AnswerRepo>();
-            services.AddTransient<IQuestionRepo, QuestionRepo>();
-            services.AddTransient<IQuizRepo, QuizRepo>();
+            services.AddScoped<IAnswerRepo, AnswerRepo>();
+            services.AddScoped<IQuestionRepo, QuestionRepo>();
+            services.AddScoped<IQuizRepo, QuizRepo>();
             services.AddScoped<ITopicRepo, TopicRepo>();
             services.AddScoped<IDifficultyRepo, DifficultyRepo>();
 
 
             services.AddDbContext<QuiztopiaDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllersWithViews();
             services.AddRazorPages();
         }

@@ -13,13 +13,13 @@ namespace Quiztopia.Models
         [Key]
         [Display(Name = "Id")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         [Display(Name = "Answer")]
         [MaxLength(50)]
         [StringLength(50, ErrorMessage = "Your answer can only be 50 characters long.")]
         [Required(ErrorMessage = "The field 'Answer' is required")]
-        public string PossibleAnswer { get; set; }
+        public string AnswerString { get; set; }
 
         [Display(Name = "Correct")]
         public bool IsCorrect { get; set; }

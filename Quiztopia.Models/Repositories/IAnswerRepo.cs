@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Quiztopia.Models.Repositories
@@ -14,12 +13,10 @@ namespace Quiztopia.Models.Repositories
 
         // DELETE (Async)
         Task<Answer> Delete(Answer answer);
-        Task<QuestionsAnswers> DeleteAnswerFromQuestion(QuestionsAnswers questionsAnswers);
 
         // READ 
         Task<IEnumerable<Answer>> GetAllAnswersAsync();
-        Task<Answer> GetAnswerByIdAsync(Guid answerId);
-        Task<IEnumerable<Answer>> GetAnswerByAnswerAsync(string answer, bool isCorrect);
-        Task<IEnumerable<Answer>> GetAllAnswersByQuestionAsync(Guid questionId);
+        Task<Answer> GetAnswerByIdAsync(int answerId);
+        Task<IEnumerable<Answer>> GetAllAnswersByQuestionAsync(int questionId);
     }
 }

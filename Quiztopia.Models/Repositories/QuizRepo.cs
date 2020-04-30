@@ -32,28 +32,6 @@ namespace Quiztopia.Models.Repositories
             }
         }
 
-        public async Task<QuizzesQuestions> AddQuestionToQuiz(Guid quizId, Guid questionId)
-        {
-            try
-            {
-                QuizzesQuestions quizzesQuestions = new QuizzesQuestions()
-                {
-                    QuizId = quizId,
-                    QuestionId = questionId
-                };
-
-                context.QuizzesQuestions.AddAsync(quizzesQuestions);
-                await context.SaveChangesAsync();
-
-                return quizzesQuestions;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                return null;
-            }
-        }
-
         public async Task<Quiz> Update(Quiz quiz)
         {
             try
@@ -93,11 +71,8 @@ namespace Quiztopia.Models.Repositories
         {
             return await context.Quizzes.Include(t => t.Topic).Include(d => d.Difficulty).Where(n => n.Name.Contains(name)).OrderBy(q => q.Name).ToListAsync();
         }
-        public async Task<IEnumerable<QuizzesQuestions>> GetAllQuizzesByQuestionAsync(Guid questionId)
-        {
-            return await context.QuizzesQuestions.Where(e => e.QuestionId == questionId).ToListAsync();
-        }
-        public async Task<Quiz> GetQuizByIdAsync(Guid quizId)
+
+        public async Task<Quiz> GetQuizByIdAsync(int quizId)
         {
             return await context.Quizzes.SingleOrDefaultAsync<Quiz>(e => e.Id == quizId);
         }

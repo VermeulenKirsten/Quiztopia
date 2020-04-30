@@ -33,7 +33,7 @@ namespace Quiztopia.Web.Controllers
         }
 
         // GET: Quiz/Details/5
-        public async Task<ActionResult> Details(Guid? id)
+        public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
@@ -85,7 +85,7 @@ namespace Quiztopia.Web.Controllers
         }
 
         // GET: Quiz/Edit/5
-        public async Task<ActionResult> Edit(Guid? id)
+        public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
@@ -105,7 +105,7 @@ namespace Quiztopia.Web.Controllers
         // POST: Quiz/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(Guid? id, IFormCollection collection, CreateUpdateQuizVM vm)
+        public async Task<ActionResult> Edit(int? id, IFormCollection collection, CreateUpdateQuizVM vm)
         {
             try
             {
@@ -119,7 +119,7 @@ namespace Quiztopia.Web.Controllers
                     return View("Error", new ErrorViewModel { RequestId = HttpContext.TraceIdentifier });
                 }
 
-                vm.Quiz.Id = id ?? Guid.Empty;
+                vm.Quiz.Id = Convert.ToInt32(id);
 
                 var result = await quizRepo.Update(vm.Quiz);
 
@@ -138,7 +138,7 @@ namespace Quiztopia.Web.Controllers
         }
 
         // GET: Quiz/Delete/5
-        public async Task<ActionResult> Delete(Guid? id)
+        public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {

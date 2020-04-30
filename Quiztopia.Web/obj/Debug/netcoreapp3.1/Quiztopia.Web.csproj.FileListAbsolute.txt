@@ -158,6 +158,7 @@ D:\MCT\2nd year\4th semester\Backend Development\Labs\Quiztopia\Quiztopia\Quizto
 D:\MCT\2nd year\4th semester\Backend Development\Labs\Quiztopia\Quiztopia\Quiztopia.Web\obj\Debug\netcoreapp3.1\Razor\Views\Difficulty\Edit.cshtml.g.cs
 D:\MCT\2nd year\4th semester\Backend Development\Labs\Quiztopia\Quiztopia\Quiztopia.Web\obj\Debug\netcoreapp3.1\Razor\Views\Difficulty\Index.cshtml.g.cs
 D:\MCT\2nd year\4th semester\Backend Development\Labs\Quiztopia\Quiztopia\Quiztopia.Web\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
+D:\MCT\2nd year\4th semester\Backend Development\Labs\Quiztopia\Quiztopia\Quiztopia.Web\obj\Debug\netcoreapp3.1\Razor\Views\Question\Create.cshtml.g.cs
 D:\MCT\2nd year\4th semester\Backend Development\Labs\Quiztopia\Quiztopia\Quiztopia.Web\obj\Debug\netcoreapp3.1\Razor\Views\Question\Delete.cshtml.g.cs
 D:\MCT\2nd year\4th semester\Backend Development\Labs\Quiztopia\Quiztopia\Quiztopia.Web\obj\Debug\netcoreapp3.1\Razor\Views\Question\Details.cshtml.g.cs
 D:\MCT\2nd year\4th semester\Backend Development\Labs\Quiztopia\Quiztopia\Quiztopia.Web\obj\Debug\netcoreapp3.1\Razor\Views\Question\Edit.cshtml.g.cs
@@ -184,8 +185,3 @@ D:\MCT\2nd year\4th semester\Backend Development\Labs\Quiztopia\Quiztopia\Quizto
 D:\MCT\2nd year\4th semester\Backend Development\Labs\Quiztopia\Quiztopia\Quiztopia.Web\obj\Debug\netcoreapp3.1\Quiztopia.Web.csproj.CopyComplete
 D:\MCT\2nd year\4th semester\Backend Development\Labs\Quiztopia\Quiztopia\Quiztopia.Web\obj\Debug\netcoreapp3.1\Quiztopia.Web.dll
 D:\MCT\2nd year\4th semester\Backend Development\Labs\Quiztopia\Quiztopia\Quiztopia.Web\obj\Debug\netcoreapp3.1\Quiztopia.Web.pdb
-D:\MCT\2nd year\4th semester\Backend Development\Labs\Quiztopia\Quiztopia\Quiztopia.Web\obj\Debug\netcoreapp3.1\Razor\Views\Quiz\Play.cshtml.g.cs
-D:\MCT\2nd year\4th semester\Backend Development\Labs\Quiztopia\Quiztopia\Quiztopia.Web\obj\Debug\netcoreapp3.1\Razor\Views\Admin\IndexUsers.cshtml.g.cs
-D:\MCT\2nd year\4th semester\Backend Development\Labs\Quiztopia\Quiztopia\Quiztopia.Web\obj\Debug\netcoreapp3.1\Razor\Views\Admin\IndexRoles.cshtml.g.cs
-D:\MCT\2nd year\4th semester\Backend Development\Labs\Quiztopia\Quiztopia\Quiztopia.Web\obj\Debug\netcoreapp3.1\Razor\Views\Question\Create.cshtml.g.cs
-D:\MCT\2nd year\4th semester\Backend Development\Labs\Quiztopia\Quiztopia\Quiztopia.Web\obj\Debug\netcoreapp3.1\Razor\Views\Shared\ErrorPage.cshtml.g.cs

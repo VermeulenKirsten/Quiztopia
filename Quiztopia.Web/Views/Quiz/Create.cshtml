@@ -18,11 +18,6 @@
                 <span asp-validation-for="Quiz.Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Quiz.Description" class="control-label"></label>
-                <textarea asp-for="Quiz.Description" class="form-control" cols="20" rows="2"></textarea>
-                <span asp-validation-for="Quiz.Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="Quiz.TopicId" class="control-label"></label>
                 <select asp-for="Quiz.TopicId" asp-items="@Model.TopicList" class="form-control"></select>
                 <span asp-validation-for="Quiz.TopicId" class="text-danger"></span>

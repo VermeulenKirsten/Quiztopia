@@ -8,8 +8,8 @@ namespace Quiztopia.Models
     {
         // Properties
 
-        public Guid QuestionId { get; set; }
-        public Guid AnswerId { get; set; }
+        public int QuestionId { get; set; }
+        public int AnswerId { get; set; }
 
         // Navigation properties
 
