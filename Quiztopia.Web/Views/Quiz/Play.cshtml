@@ -1,0 +1,50 @@
+﻿@model Quiztopia.Web.ViewModels.PlayVM
+
+@{
+    ViewData["Title"] = "Play";
+}
+
+
+    <div class="jumbotron">
+        <h1 class="display-3">@Model.Quiz.Name</h1>
+        <hr class="my-4">
+
+        <div class="row">
+            <div class="col-md-12">
+                <form asp-action="Play">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    @foreach (KeyValuePair<Question, List<Answer>> keyValue in Model.QuestionAnswers)
+                    {
+                        <h1>@keyValue.Key.QuestionString</h1>
+
+                        @if (keyValue.Key.ImageData != null)
+                        {
+                            <img style="width: 200px; display: block;" class="mb-2" src="@String.Format("data:image/gif;base64,{0}", Convert.ToBase64String(keyValue.Key.ImageData))" alt="Card image">
+                        }
+
+                        foreach (var answer in keyValue.Value)
+                        {
+                            <div class="form-group">
+                                <label class="form-check-label" for="@answer.Id">
+                                    <input type="radio" name="@keyValue.Key.QuestionString" id="@answer.Id" value="@answer.IsCorrect" asp-for="@answer.IsCorrect" required /> @answer.PossibleAnswer
+                                </label>
+                            </div>
+                        }
+                    }
+
+
+                    <div class="form-group">
+
+                        @Html.HiddenFor(vm => vm.UserId)
+                        @Html.HiddenFor(vm => vm.Quiz.Id)
+                        @Html.HiddenFor(vm => vm.Quiz.Name)
+
+                        <input type="submit" value="Submit" class="btn btn-success" />
+                        <a class="btn btn-danger" asp-action="Index">Stop</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>

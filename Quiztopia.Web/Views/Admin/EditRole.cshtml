@@ -1,0 +1,28 @@
+﻿@model Quiztopia.Web.ViewModels.AddRoleVM
+
+@{
+    ViewData["Title"] = "EditRole";
+}
+
+    <div class="jumbotron">
+
+        <h1 class="display-3 pb-4">Update</h1>
+
+        <hr />
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="EditRole">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="RoleName" class="control-label"></label>
+                        <input asp-for="RoleName" class="form-control" />
+                        <span asp-validation-for="RoleName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Save" class="btn btn-success" />
+                        <a class="btn btn-dark" asp-action="IndexRoles">Back to List</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+</div>

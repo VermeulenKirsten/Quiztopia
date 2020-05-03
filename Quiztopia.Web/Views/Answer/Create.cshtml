@@ -1,38 +1,44 @@
-﻿@model Quiztopia.Models.Answer
+﻿@model Quiztopia.Web.ViewModels.QuestionAnswerVM
 
 @{
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+    <div class="jumbotron">
 
-<h4>Answer</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="AnswerString" class="control-label"></label>
-                <input asp-for="AnswerString" class="form-control" />
-                <span asp-validation-for="AnswerString" class="text-danger"></span>
+        <h1 class="display-3 pb-4">Create a answer</h1>
+
+        <hr />
+
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="pb-4">Question: @Model.Question.QuestionString</h1>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsCorrect" /> @Html.DisplayNameFor(model => model.IsCorrect)
-                </label>
+            <div class="col-md-6">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(vm => vm.QuizId)
+                    @Html.HiddenFor(vm => vm.Question.Id)
+                    @Html.HiddenFor(vm => vm.Question.QuestionString)
+                    @Html.HiddenFor(vm => vm.Answer.Id)
+
+                    <div class="form-group">
+                        <label asp-for="Answer.PossibleAnswer" class="control-label"></label>
+                        <input asp-for="Answer.PossibleAnswer" class="form-control" />
+                        <span asp-validation-for="Answer.PossibleAnswer" class="text-danger"></span>
+                    </div>
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="Answer.IsCorrect" /> @Html.DisplayNameFor(model => model.Answer.IsCorrect)
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-success" />
+                        <a class="btn btn-danger" asp-action="Index" asp-route-questionId="@Model.Question.Id" asp-route-quizId="@Model.QuizId">Back to List</a>
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}

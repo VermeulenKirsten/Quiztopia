@@ -13,12 +13,12 @@ namespace Quiztopia.Models
         [Key]
         [Display(Name = "Id")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [Display(Name = "Name")]
         [MaxLength(50)]
         [StringLength(50, ErrorMessage = "Your quizname can only be 50 characters long.")]
-        [Required(ErrorMessage = "The field 'Name' is required")]
+        [Required(ErrorMessage = "Name is required")]
         public string Name { get; set; }
 
         [Display(Name = "Description")]
@@ -26,9 +26,11 @@ namespace Quiztopia.Models
         [StringLength(500, ErrorMessage = "Your description can only be 500 characters long.")]
         public string Description { get; set; } = "No description available";
 
+        [Required]
         [Display(Name = "Topic")]
         public int TopicId { get; set; }
 
+        [Required]
         [Display(Name = "Difficulty")]
         public int DifficultyId { get; set; }
 
@@ -36,6 +38,7 @@ namespace Quiztopia.Models
         // Navigation properties
 
         public ICollection<QuizzesQuestions> QuizzesQuestions { get; set; }
+        public ICollection<QuizzesScoreboards> QuizzesScoreboards { get; set; }
         public Topic Topic { get; set; }
         public Difficulty Difficulty { get; set; }
     }

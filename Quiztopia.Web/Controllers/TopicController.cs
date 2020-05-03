@@ -27,23 +27,6 @@ namespace Quiztopia.Web.Controllers
             return View(result);
         }
 
-        // GET: Topic/Details/5
-        public async Task<ActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return View("Error", new ErrorViewModel { RequestId = HttpContext.TraceIdentifier });
-            }
-
-            var result = await topicRepo.GetTopicByIdAsync(id.Value);
-
-            if (result == null)
-            {
-                return Redirect("/ErrorPage/404");
-            }
-            return View(result);
-        }
-
         // GET: Topic/Create
         public async Task<ActionResult> Create()
         {

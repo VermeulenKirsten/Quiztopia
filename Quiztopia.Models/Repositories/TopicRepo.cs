@@ -67,6 +67,11 @@ namespace Quiztopia.Models.Repositories
             return await context.Topics.OrderBy(e => e.Name).ToListAsync();
         }
 
+        public async Task<Topic> GetTopicByNameAsync(string name)
+        {
+            return await context.Topics.SingleOrDefaultAsync<Topic>(e => e.Name == name);
+        }
+
         public async Task<Topic> GetTopicByIdAsync(int topicId)
         {
             return await context.Topics.SingleOrDefaultAsync<Topic>(e => e.Id == topicId);

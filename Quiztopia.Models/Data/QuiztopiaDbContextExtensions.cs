@@ -13,21 +13,29 @@ namespace Quiztopia.Models.Data
     {
         private static List<Difficulty> _difficulties = new List<Difficulty>
         {
-            new Difficulty
-            {
-                Id = 1,
-                Name = "Easy"
-            },
-            new Difficulty
-            {
-                Id = 2,
-                Name = "Intermediate"
-            },
-            new Difficulty
-            {
-                Id = 3,
-                Name = "Hard"
-            }
+            new Difficulty { Name = "Very Easy" },
+            new Difficulty { Name = "Easy" },
+            new Difficulty { Name = "Intermediate" },
+            new Difficulty { Name = "Hard" },
+            new Difficulty { Name = "Very Hard" },
+
+        };
+
+        private static List<Topic> _topics = new List<Topic>
+        {
+            new Topic { Name = "General Knowledge" },
+            new Topic { Name = "Music" },
+            new Topic { Name = "Sports" },
+            new Topic { Name = "Film" },
+            new Topic { Name = "Food and Drink" },
+            new Topic { Name = "Geography" },
+            new Topic { Name = "History" },
+            new Topic { Name = "Math" },
+            new Topic { Name = "Language" },
+            new Topic { Name = "Science" },
+            new Topic { Name = "Animals" },
+            new Topic { Name = "Friends and Family" },
+            
         };
 
         public async static Task SeedRoles(RoleManager<IdentityRole> RoleMgr)
@@ -91,6 +99,96 @@ namespace Quiztopia.Models.Data
                         throw new InvalidOperationException("Failed to build " + user.UserName);
                     }
                 }
+            }
+        }
+        public async static Task SeedData(QuiztopiaDbContext context)
+        {
+            //1. Topics          
+
+            if (!context.Topics.Any())
+            {                
+                Debug.WriteLine("Seeding Topics");
+
+                foreach (Topic t in _topics)
+                {
+                    if (!context.Topics.Any(i => i.Id == t.Id))
+                        await context.Topics.AddAsync(t);
+                }
+
+                await context.SaveChangesAsync();
+
+            }
+
+            //2. Difficulties          
+
+            if (!context.Difficulties.Any())
+            {               
+                Debug.WriteLine("Seeding Difficulties");
+
+                foreach (Difficulty d in _difficulties)
+                {
+                    if (!context.Difficulties.Any(i => i.Id == d.Id))
+                        await context.Difficulties.AddAsync(d);
+                }
+
+                await context.SaveChangesAsync();
+
+            }
+
+
+            if (!context.Quizzes.Any())
+            {
+
+                // 3. Quiz
+
+                Quiz quiz = new Quiz()
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "Johan",
+                    Description = "This quiz is made via a data seeder",
+                    Topic = await context.Topics.SingleOrDefaultAsync<Topic>(t => t.Name == "General Knowledge"),
+                    Difficulty = await context.Difficulties.SingleOrDefaultAsync<Difficulty>(d => d.Name == "Easy")
+                };
+
+                await context.Quizzes.AddAsync(quiz);
+                await context.SaveChangesAsync();
+
+                // 4. Question
+
+                Question question = new Question()
+                {
+                    Id = Guid.NewGuid(),
+                    QuestionString = "Is Johan the best teacher?"
+                };
+
+                await context.Questions.AddAsync(question);
+
+                // 5. QuizzesQuestion
+
+                QuizzesQuestions quizzesQuestions = new QuizzesQuestions()
+                {
+                    QuizId = quiz.Id,
+                    QuestionId = question.Id
+                };
+
+                await context.QuizzesQuestions.AddAsync(quizzesQuestions);
+
+                // 6. Answers
+
+                List<Answer> answers = new List<Answer>
+                {
+                    new Answer() { Id = Guid.NewGuid(), PossibleAnswer = "Yes", IsCorrect = true, Question = question},
+                    new Answer() { Id = Guid.NewGuid(), PossibleAnswer = "No", IsCorrect = false, Question = question}
+                };
+
+                foreach (var answer in answers)
+                {
+                    if (!context.Answers.Any(i => i.Id == answer.Id))
+                        await context.Answers.AddAsync(answer);
+                }
+
+                await context.SaveChangesAsync();
+
             }
         }
     }

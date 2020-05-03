@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Quiztopia.Models.Repositories
@@ -16,7 +17,7 @@ namespace Quiztopia.Models.Repositories
 
         // READ 
         Task<IEnumerable<Answer>> GetAllAnswersAsync();
-        Task<Answer> GetAnswerByIdAsync(int answerId);
-        Task<IEnumerable<Answer>> GetAllAnswersByQuestionAsync(int questionId);
+        Task<Answer> GetAnswerByIdAsync(Guid answerId);
+        Task<IEnumerable<Answer>> GetAllAnswersByQuestionAsync(Guid questionId);
     }
 }

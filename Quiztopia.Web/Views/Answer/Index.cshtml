@@ -1,47 +1,47 @@
-﻿@model IEnumerable<Quiztopia.Models.Answer>
+﻿@model Quiztopia.Web.ViewModels.QuestionAnswerVM
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<div class="jumbotron">
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AnswerString)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsCorrect)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AnswerString)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsCorrect)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <h1 class="pb-4">Question: @Model.Question.QuestionString</h1>
+
+    <p class="pd-4">
+        <a class="btn btn-lg btn-dark" asp-action="Create" asp-route-questionId="@Model.Question.Id" asp-route-quizId="@Model.QuizId">Create New</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Answer.PossibleAnswer)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Answer.IsCorrect)
+                </th>
+                <th>Options</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Answers)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PossibleAnswer)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsCorrect)
+                    </td>
+                    <td>
+                        <a class="btn btn-info" asp-action="Edit" asp-route-questionId="@Model.Question.Id" asp-route-answerId="@item.Id" asp-route-quizId="@Model.QuizId">Edit</a>
+                        <a class="btn btn-danger" asp-action="Delete" asp-route-questionId="@Model.Question.Id" asp-route-answerId="@item.Id" asp-route-quizId="@Model.QuizId">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <p class="pt-4">
+        <a class="btn btn-lg btn-dark" asp-controller="Question" asp-action="Index" asp-route-quizId="@Model.QuizId">Back to list</a>
+    </p>
+</div>

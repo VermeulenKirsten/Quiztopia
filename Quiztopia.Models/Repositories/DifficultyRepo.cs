@@ -71,5 +71,10 @@ namespace Quiztopia.Models.Repositories
         {
             return await context.Difficulties.SingleOrDefaultAsync<Difficulty>(e => e.Id == difficultyId);
         }
+
+        public async Task<Difficulty> GetDifficultyByNameAsync(string name)
+        {
+            return await context.Difficulties.SingleOrDefaultAsync<Difficulty>(e => e.Name == name);
+        }
     }
 }

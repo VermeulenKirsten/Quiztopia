@@ -9,6 +9,7 @@ namespace Quiztopia.Models.Repositories
         Task<Difficulty> Delete(Difficulty difficulty);
         Task<IEnumerable<Difficulty>> GetAllDifficultiesAsync();
         Task<Difficulty> GetDifficultyByIdAsync(int difficultyId);
+        Task<Difficulty> GetDifficultyByNameAsync(string name);
         Task<Difficulty> Update(Difficulty difficulty);
     }
 }

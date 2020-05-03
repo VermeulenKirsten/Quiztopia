@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Quiztopia.API.DTOs;
@@ -16,14 +18,20 @@ namespace Quiztopia.API.Controllers
     public class QuizController : ControllerBase
     {
         private readonly IQuizRepo quizRepo;
+        private readonly ITopicRepo topicRepo;
+        private readonly IDifficultyRepo difficultyRepo;
+        private const string AuthSchemes = CookieAuthenticationDefaults.AuthenticationScheme + ",Identity.Application";
 
-        public QuizController(IQuizRepo quizRepo)
+        public QuizController(IQuizRepo quizRepo, ITopicRepo topicRepo, IDifficultyRepo difficultyRepo)
         {
             this.quizRepo = quizRepo;
+            this.topicRepo = topicRepo;
+            this.difficultyRepo = difficultyRepo;
         }
 
         // GET: api/Quiz
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> Get()
         {
             //1. Get models async
@@ -43,6 +51,7 @@ namespace Quiztopia.API.Controllers
 
         // GET: api/Quiz/5
         [HttpGet("{name?}")]
+        [Authorize(AuthenticationSchemes = AuthSchemes, Roles = "Admin")]
         public async Task<IActionResult> Get([FromRoute] string name = null)
         {
             try
@@ -75,20 +84,37 @@ namespace Quiztopia.API.Controllers
 
         // POST: api/Quiz
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> Post([FromForm] QuizDTO dto)
         {
-        }
+            var confirmedModel = new Quiz(); //te returnen DTO
+            try
+            {
+                //1. Validatie
+                if (!ModelState.IsValid) 
+                { 
+                    return BadRequest(ModelState); 
+                
+                }
+                //2.Entity (model) via de mapper ophalen
+                var model = new Quiz() { };
 
-        // PUT: api/Quiz/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
+                model = await QuizMapper.ConvertTo_Entity(dto, topicRepo, difficultyRepo, model);
 
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+                //3. Entity (model) toevoegen via het repo
+                confirmedModel = await quizRepo.Add(model);
+
+                //4. Een bevestiging v foutieve actie teruggeven
+                if (confirmedModel == null)
+                {
+                    return NotFound(model.Name + " was not saved");
+                }
+            }
+            catch (Exception exc)
+            {
+                return BadRequest("Failed to add");
+            }
+            //5. DTO terugsturen als bevestiging
+            return CreatedAtAction("Get", new { id = confirmedModel.Id }, dto);
         }
     }
 }
