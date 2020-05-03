@@ -1,33 +1,45 @@
-﻿@model Quiztopia.Models.Question
+﻿@model Quiztopia.Web.ViewModels.QuizQuestionVM
 
 @{
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+    <div class="jumbotron">
 
-<h4>Question</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="QuestionString" class="control-label"></label>
-                <input asp-for="QuestionString" class="form-control" />
-                <span asp-validation-for="QuestionString" class="text-danger"></span>
+        <h1 class="display-3 pb-4">Create a question</h1>
+
+        <hr />
+
+        <div class="row">
+            <div class="col-md-6">
+                <form asp-action="Create" method="post" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(vm => vm.QuizId)
+                    @Html.HiddenFor(vm => vm.Question.Id)
+
+                    <div class="form-group">
+                        <label asp-for="Question.QuestionString" class="control-label"></label>
+                        <input asp-for="Question.QuestionString" class="form-control" />
+                        <span asp-validation-for="Question.QuestionString" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Question.ImageString" class="control-label"></label>
+                        <div class="input-group mb-3">
+                            <div class="custom-file">
+                                <input type="file" asp-for="Question.ImageString" class="custom-file-input" id="inputGroupFile02">
+                                <label class="custom-file-label" asp-for="Question.ImageString" for="inputGroupFile02">Choose file</label>
+                            </div>
+                            <span asp-validation-for="Question.ImageString" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-success" />
+                        <a class="btn btn-danger" asp-action="Index" asp-route-quizId="@Model.QuizId">Back to List</a>
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>            
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}

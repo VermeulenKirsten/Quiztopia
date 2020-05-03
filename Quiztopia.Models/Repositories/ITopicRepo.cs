@@ -9,6 +9,7 @@ namespace Quiztopia.Models.Repositories
         Task<Topic> Delete(Topic topic);
         Task<IEnumerable<Topic>> GetAllTopicsAsync();
         Task<Topic> GetTopicByIdAsync(int topicId);
+        Task<Topic> GetTopicByNameAsync(string name);
         Task<Topic> Update(Topic topic);
     }
 }

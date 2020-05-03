@@ -9,16 +9,20 @@ namespace Quiztopia.Models.Repositories
     {
         // CREATE (Async) 
         Task<Question> Add(Question question);
+        Task<QuizzesQuestions> AddQuestionToQuiz(QuizzesQuestions quizzesQuestions);
 
         // UPDATE (Async)
         Task<Question> Update(Question question);
 
         // DELETE (Async)
         Task<Question> Delete(Question question);
+        Task<QuizzesQuestions> DeleteQuestionFromQuiz(QuizzesQuestions quizzesQuestions);
 
         // READ 
         Task<IEnumerable<Question>> GetAllQuestionsAsync();
-        Task<Question> GetQuestionByIdAsync(int questionId);
-        Task<IEnumerable<Question>> GetAllQuestionsByQuizAsync(int questionId);
+        Task<IEnumerable<Question>> GetQuestionByQuestionAsync(string question);
+        Task<Question> GetQuestionByIdAsync(Guid questionId);
+        Task<IEnumerable<QuizzesQuestions>> GetAllQuizzesQuestionsAsync(Guid questionId);
+        Task<IEnumerable<Question>> GetAllQuestionsByQuizAsync(Guid questionId);
     }
 }

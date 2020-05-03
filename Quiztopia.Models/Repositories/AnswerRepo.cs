@@ -64,17 +64,16 @@ namespace Quiztopia.Models.Repositories
 
         public async Task<IEnumerable<Answer>> GetAllAnswersAsync()
         {
-            return await context.Answers.OrderBy(e => e.AnswerString).ToListAsync();
+            return await context.Answers.OrderBy(e => e.PossibleAnswer).ToListAsync();
         }
 
-        public async Task<Answer> GetAnswerByIdAsync(int answerId)
+        public async Task<Answer> GetAnswerByIdAsync(Guid answerId)
         {
             return await context.Answers.SingleOrDefaultAsync<Answer>(e => e.Id == answerId);
         }
-
-        public async Task<IEnumerable<Answer>> GetAllAnswersByQuestionAsync(int questionId)
+        public async Task<IEnumerable<Answer>> GetAllAnswersByQuestionAsync(Guid questionId)
         {
-            throw new NotImplementedException();
+            return await context.Answers.Include(q => q.Question).Where(q => q.Question.Id == questionId).OrderBy(e => e.PossibleAnswer).ToListAsync();
         }
 
     }

@@ -64,7 +64,7 @@ namespace Quiztopia.Models.Repositories
 
         public async Task<IEnumerable<Quiz>> GetAllQuizzesAsync()
         {
-            return await context.Quizzes.Include(t => t.Topic).Include(d => d.Difficulty).OrderBy(q => q.Name).ToListAsync();
+            return await context.Quizzes.Include(t => t.Topic).Include(d => d.Difficulty).Include(t => t.QuizzesQuestions).ThenInclude(t => t.Question).ThenInclude(t => t.Answers).OrderBy(q => q.Name).ToListAsync();
         }
 
         public async Task<IEnumerable<Quiz>> GetQuizzesByNameAsync(string name)
@@ -72,9 +72,14 @@ namespace Quiztopia.Models.Repositories
             return await context.Quizzes.Include(t => t.Topic).Include(d => d.Difficulty).Where(n => n.Name.Contains(name)).OrderBy(q => q.Name).ToListAsync();
         }
 
-        public async Task<Quiz> GetQuizByIdAsync(int quizId)
+        public async Task<Quiz> GetQuizByIdAsync(Guid quizId)
         {
-            return await context.Quizzes.SingleOrDefaultAsync<Quiz>(e => e.Id == quizId);
+            return await context.Quizzes.Include(s => s.QuizzesScoreboards).ThenInclude(s => s.Scoreboard).SingleOrDefaultAsync<Quiz>(e => e.Id == quizId);
+        }
+
+        public async Task<IEnumerable<QuizzesQuestions>> GetQuizzesByQuestionAsync(Guid questionId)
+        {
+            return await context.QuizzesQuestions.Include(q => q.Question).Where(q => q.Question.Id == questionId).ToListAsync();
         }
     }
 }

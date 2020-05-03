@@ -35,7 +35,7 @@ namespace Quiztopia.Web
             services.AddScoped<IQuizRepo, QuizRepo>();
             services.AddScoped<ITopicRepo, TopicRepo>();
             services.AddScoped<IDifficultyRepo, DifficultyRepo>();
-
+            services.AddScoped<IScoreboardRepo, ScoreboardRepo>();
 
             services.AddDbContext<QuiztopiaDbContext>(options =>
                 options.UseSqlServer(
@@ -51,11 +51,13 @@ namespace Quiztopia.Web
             {
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
+                app.UseStatusCodePagesWithRedirects("/ErrorPage/{0}");
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Home/ErrorPage");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseStatusCodePagesWithRedirects("/ErrorPage/{0}");
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
@@ -70,12 +72,13 @@ namespace Quiztopia.Web
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Quiz}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
 
             QuiztopiaDbContextExtensions.SeedRoles(roleMgr).Wait();
             QuiztopiaDbContextExtensions.SeedUsers(userMgr).Wait();
+            QuiztopiaDbContextExtensions.SeedData(context).Wait();
         }
     }
 }

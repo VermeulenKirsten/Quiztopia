@@ -1,0 +1,51 @@
+﻿@model Quiztopia.Web.ViewModels.ScoreboardVM
+
+@{
+    ViewData["Title"] = "Scores";
+}
+
+    <div class="jumbotron">
+
+        <h1 class="display-3 pb-4">Your scoreboard</h1>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Player
+                    </th>
+                    <th>
+                        Player Score
+                    </th>
+                    <th>
+                        TotalScore
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Quiz.QuizzesScoreboards.OrderByDescending(s => s.Scoreboard.YourScore))
+                {
+                    if (item.Scoreboard.UserId == Guid.Parse(Model.User.Id))
+
+                    {
+                        <tr>
+                            <td>
+                                @Model.User.UserName
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Scoreboard.YourScore)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Scoreboard.TotalScore)
+                            </td>
+
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+
+        <p class="pt-4">
+            <a class="btn btn-lg btn-dark" asp-action="Index">Back to list</a>
+        </p>
+    </div>

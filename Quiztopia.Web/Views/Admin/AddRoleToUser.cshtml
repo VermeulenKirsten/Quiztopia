@@ -1,0 +1,42 @@
+﻿@model Quiztopia.Web.ViewModels.RolesForUserVM
+
+@{
+    ViewData["Title"] = "AddRoleToUser";
+}
+
+
+    <div class="jumbotron">
+
+        <h1 class="display-3 pb-4">Add role</h1>
+
+        <hr />
+
+        <h4>User @Model.User.UserName has following roles</h4>
+
+        @if (@Model.AssignedRoles.Count() > 0)
+        {
+            <ul>
+
+                @foreach (var role in Model.AssignedRoles)
+                {
+                    <li>@role</li>
+                }
+
+            </ul>
+        }
+        else
+        {
+            <p>This user has no roles</p>
+        }
+
+        <form asp-action="AddRoleToUser">
+            <div class="form-group">
+                <label asp-for="RoleId" class="control-label">Select a role to add</label>
+                <select asp-for="RoleId" asp-items="(new SelectList(@Model.UnAssignedRoles))" class="form-control"></select>
+                <span asp-validation-for="RoleId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-success" />
+            </div>
+        </form>
+        </div>

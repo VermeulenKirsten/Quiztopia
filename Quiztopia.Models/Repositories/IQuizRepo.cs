@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Quiztopia.Models.Repositories
@@ -9,7 +10,8 @@ namespace Quiztopia.Models.Repositories
         Task<Quiz> Delete(Quiz quiz);
         Task<IEnumerable<Quiz>> GetAllQuizzesAsync();
         Task<IEnumerable<Quiz>> GetQuizzesByNameAsync(string name);
-        Task<Quiz> GetQuizByIdAsync(int quizId);
+        Task<IEnumerable<QuizzesQuestions>> GetQuizzesByQuestionAsync(Guid questionId);
+        Task<Quiz> GetQuizByIdAsync(Guid quizId);
         Task<Quiz> Update(Quiz quiz);
     }
 }

@@ -4,24 +4,125 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<div class="jumbotron">
 
+    <h1 class="display-3 pb-4">Quiz</h1>
+    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+    {
+        <p class="pd-4">
+            <a class="btn btn-lg btn-dark" asp-action="Create">Create New</a>
+        </p>
+    }
 
-@foreach (var item in Model)
-{
-    <a href="@Url.Action("IndexByQuiz", "Question", new { id = item.Id })">
-        <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
-            <div class="card-header">@Html.DisplayFor(modelItem => item.Topic.Name)</div>
-            <div class="card-body">
-                <h4 class="card-title">@Html.DisplayFor(modelItem => item.Name)</h4>
-                <p class="card-text">@Html.DisplayFor(modelItem => item.Description)</p>
-                <hr class="border-secondary my-4">
-                <p class="card-text">@Html.DisplayFor(modelItem => item.Difficulty.Name)</p>
-            </div>
-        </div>
-    </a>
-}
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+            {
+                <div class="col-lg-4">
+                    <div class="card text-white bg-secondary mb-3" style="max-width: 20rem;">
+
+                        <!-- Header -->
+
+                        <div class="card-header">@Html.DisplayFor(modelItem => item.Topic.Name)</div>
+
+                        <!-- Body -->
+
+                        <div class="card-body">
+                            <h4 class="card-title">@Html.DisplayFor(modelItem => item.Name)</h4>
+                            <p class="card-text">@Html.DisplayFor(modelItem => item.Description)</p>
+                            <p class="card-text">@Html.DisplayFor(modelItem => item.Difficulty.Name)</p>
+
+                            <!-- Line -->
+
+                            <hr class="border-light my-4">
+
+                            <!-- Error -->
+
+                            @if (item.QuizzesQuestions.Count() == 0)
+                            {
+                                <p class="card-text">No questions in quiz!</p>
+                            }
+                            else if (!item.QuizzesQuestions.Any(q => q.Question.Answers.Count() > 1))
+                            {
+                                <p class="card-text">Missing answers in questions!</p>
+                            }
+
+                            <!-- Options -->
+
+                            <p class="mb-0">
+
+                                @if (item.QuizzesQuestions.Count() > 0 && item.QuizzesQuestions.Any(q => q.Question.Answers.Count() > 1))
+                                {
+                                    <a type="button" class="btn btn-success mr-2 mb-2" asp-action="Play" asp-route-quizId="@item.Id">Play</a>
+                                    <a type="button" class="btn btn-warning mr-2 mb-2" asp-action="Scores" asp-route-quizId="@item.Id">Scores</a>
+                                }
+                                else
+                                {
+                                    <button type="button" class="btn btn-success mr-2 mb-2 disabled">Play</button>
+                                }
+
+                                <a type="button" class="btn btn-info mb-2 mr-2" asp-controller="Question" asp-action="Index" asp-route-quizId="@item.Id">Edit</a>
+
+                                @if (item.QuizzesQuestions.Count() > 0)
+                                {
+                                    <a type="button" class="btn btn-danger mb-2" asp-action="DeleteQuestions" asp-route-quizId="@item.Id">Clear Quiz</a>
+                                }
+                                else
+                                {
+                                    <a type="button" class="btn btn-danger mb-2" asp-action="Delete" asp-route-quizId="@item.Id">Delete</a>
+                                }
+
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                if (item.QuizzesQuestions.Any(q => q.Question.Answers.Count() > 1) && item.QuizzesQuestions.Count() > 0)
+                {
+                    <div class="col-lg-4">
+                        <div class="card text-white bg-secondary mb-3" style="max-width: 20rem;">
+
+                            <!-- Header -->
+
+                            <div class="card-header">@Html.DisplayFor(modelItem => item.Topic.Name)</div>
+
+                            <!-- Body -->
+
+                            <div class="card-body">
+                                <h4 class="card-title">@Html.DisplayFor(modelItem => item.Name)</h4>
+                                <p class="card-text">@Html.DisplayFor(modelItem => item.Description)</p>
+                                <p class="card-text">@Html.DisplayFor(modelItem => item.Difficulty.Name)</p>
+
+                                <!-- Line -->
+
+                                <hr class="border-light my-4">
+
+                                <!-- Options -->
+
+                                <p class="mb-0">
+
+                                    @if (User.Identity.IsAuthenticated)
+                                    {
+                                        <a type="button" class="btn btn-success mr-2 mb-2" asp-action="Play" asp-route-quizId="@item.Id">Play</a>
+                                        <a type="button" class="btn btn-warning mr-2 mb-2" asp-action="Scores" asp-route-quizId="@item.Id">Your scores</a>
+                                    }
+                                    else
+                                    {
+                                        <button type="button" class="btn btn-success mr-2 mb-2 disabled">Play</button>
+                                        <button type="button" class="btn btn-warning mr-2 mb-2 disabled">Your scores</button>
+                                        <a type="button" class="btn btn-info mr-2 mb-2" asp-area="Identity" asp-page="/Account/Register">Register</a>
+                                    }
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        }
+
+    </div>
+</div>

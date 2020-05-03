@@ -27,23 +27,6 @@ namespace Quiztopia.Web.Controllers
             return View(result);
         }
 
-        // GET: Difficulty/Details/5
-        public async Task<ActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return View("Error", new ErrorViewModel { RequestId = HttpContext.TraceIdentifier });
-            }
-
-            var result = await difficultyRepo.GetDifficultyByIdAsync(id.Value);
-
-            if (result == null)
-            {
-                return Redirect("/ErrorPage/404");
-            }
-            return View(result);
-        }
-
         // GET: Difficulty/Create
         public async Task<ActionResult> Create()
         {
@@ -59,14 +42,14 @@ namespace Quiztopia.Web.Controllers
             {
                 if (!ModelState.IsValid)
                 {
-                    return View("Error", new ErrorViewModel { RequestId = HttpContext.TraceIdentifier });
+                    return Redirect("/ErrorPage/400");
                 }
 
                 var result = await difficultyRepo.Add(difficulty);
 
                 if (result == null)
                 {
-                    throw new Exception("Invalid Entry");
+                    return Redirect("/ErrorPage/404");
                 }
 
                 return RedirectToAction(nameof(Index));
@@ -84,7 +67,7 @@ namespace Quiztopia.Web.Controllers
         {
             if (id == null)
             {
-                return View("Error", new ErrorViewModel { RequestId = HttpContext.TraceIdentifier });
+                return Redirect("/ErrorPage/400");
             }
 
             var result = await difficultyRepo.GetDifficultyByIdAsync(id.Value);
@@ -111,7 +94,7 @@ namespace Quiztopia.Web.Controllers
 
                 if (id == null)
                 {
-                    return View("Error", new ErrorViewModel { RequestId = HttpContext.TraceIdentifier });
+                    return Redirect("/ErrorPage/400");
                 }
 
                 var result = await difficultyRepo.Update(difficulty);
@@ -135,14 +118,14 @@ namespace Quiztopia.Web.Controllers
         {
             if (id == null)
             {
-                return View("Error", new ErrorViewModel { RequestId = HttpContext.TraceIdentifier });
+                return Redirect("/ErrorPage/400");
             }
 
             var result = await difficultyRepo.GetDifficultyByIdAsync(id.Value);
 
             if (result == null)
             {
-                ModelState.AddModelError("", "Not Found");
+                Redirect("/ErrorPage/404");
             }
 
             return View(result);
@@ -157,7 +140,7 @@ namespace Quiztopia.Web.Controllers
             {
                 if (id == null)
                 {
-                    return View("Error", new ErrorViewModel { RequestId = HttpContext.TraceIdentifier });
+                    return Redirect("/ErrorPage/400");
                 }
 
                 var result = await difficultyRepo.Delete(difficulty);

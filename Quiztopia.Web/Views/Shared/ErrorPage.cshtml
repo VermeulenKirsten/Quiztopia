@@ -1,0 +1,14 @@
+﻿@{
+    ViewData["Title"] = "ErrorPage";
+}
+
+
+<div class="jumbotron">
+
+    <h1 class="pb-4">@ViewBag.ErrorMessage</h1>
+
+
+    <p class="pt-4">
+        <a class="btn btn-lg btn-dark" asp-controller="Quiz" asp-action="Index">Back to all quizzes</a>
+    </p>
+</div>

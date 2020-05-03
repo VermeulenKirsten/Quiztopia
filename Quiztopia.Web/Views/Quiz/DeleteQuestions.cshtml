@@ -1,0 +1,23 @@
+﻿@model Quiztopia.Models.Quiz
+
+@{
+    ViewData["Title"] = "DeleteQuestions";
+}
+
+<div class="jumbotron">
+
+    <h1 class="display-3 pb-4">Clear</h1>
+    <h3>Are you sure you want to clear '@Html.DisplayFor(model => model.Name)'?</h3>
+    <hr />
+    <div>
+        <form asp-action="DeleteQuestions">
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(m => m.Id)
+            @Html.HiddenFor(m => m.Name)
+            @Html.HiddenFor(m => m.TopicId)
+            @Html.HiddenFor(m => m.DifficultyId)
+            <input type="submit" value="Clear" class="btn btn-danger" />
+            <a class="btn btn-dark" asp-action="Index">Back to List</a>
+        </form>
+    </div>
+</div>

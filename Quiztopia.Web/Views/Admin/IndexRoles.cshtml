@@ -1,0 +1,52 @@
+﻿@model IEnumerable<IdentityRole>
+
+@{
+    ViewData["Title"] = "IndexRoles";
+}
+
+    <div class="jumbotron">
+
+        <h1 class="display-3 pb-4">Roles</h1>
+
+        <p class="pd-4">
+            <a class="btn btn-lg btn-dark" asp-action="CreateRole">Create New</a>
+        </p>
+
+        @if (!Model.Any())
+        {
+            // No roles
+
+            <p>No roles yet</p>
+            <br />
+            <p>Create your for first role @Html.ActionLink("here", "CreateRole")</p>
+        }
+        else
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Name)
+                        </th>
+                        <th>
+                            Options
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                <a class="btn btn-danger" asp-action="DeleteRole" asp-route-roleName="@item.Name">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        }
+</div>
